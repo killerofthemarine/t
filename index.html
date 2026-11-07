@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#161617">
+<title>TECNO STORE TA | iPhone, Mac y más</title>
+<meta name="description" content="Equipos Apple sellados, Open Box y usados. Consultá stock y precios por WhatsApp o Instagram.">
+<style>
+:root{--nav:#161617;--bg:#fff;--g:#f5f5f7;--tile:#eef1f7;--line:#d9dbe1;--tx:#1d1d1f;--mut:#6e6e73;--blue:#0071e3;--wa:#25d366}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}[hidden]{display:none!important}
+body{font-family:-apple-system,"SF Pro Display","SF Pro Text","Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.45}
+a{color:inherit;text-decoration:none}.w{max-width:1240px;margin:auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 22px;border-radius:999px;font-weight:600;font-size:.88rem;border:1.5px solid var(--tx);background:#fff;color:var(--tx);cursor:pointer;transition:.2s}
+.btn:hover{background:var(--tx);color:#fff}.btn.wa{background:var(--wa);border-color:var(--wa);color:#04210f}.btn.wa:hover{background:#1fb457}.btn.lt{background:#fff;color:#000;border-color:#fff}.btn.lt:hover{background:#ddd;color:#000}
+/* NAV */
+header{position:sticky;top:0;z-index:50;background:var(--nav);color:#fff}
+.nav{display:flex;align-items:center;gap:26px;height:60px}.logo{font-weight:800;display:flex;align-items:center;gap:9px;line-height:1;flex-shrink:0}.logo small{display:block;font-size:.55rem;letter-spacing:.18em}.logo b{border-left:2px solid #fff;padding-left:9px;font-size:1.45rem}
+nav ul{display:flex;gap:22px;list-style:none;flex:1;align-items:center}nav li a{font-size:.82rem;color:#e8e8ed;opacity:.85}nav li a:hover,nav li a.on{opacity:1;color:#fff}
+.nr{display:flex;gap:10px;align-items:center}.nr .btn{padding:7px 16px;font-size:.8rem}
+#bg{display:none;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+/* HERO CARRUSEL */
+.hero{position:relative;height:min(64vh,520px);min-height:380px;overflow:hidden;background:#000}
+.sl{position:absolute;inset:0;opacity:0;transition:opacity .8s;display:flex;align-items:center}.sl.on{opacity:1;z-index:2}
+.sl .w{width:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px}
+.sl small{letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;opacity:.8}.sl h2{font-size:clamp(2rem,5vw,3.8rem);letter-spacing:-.04em;line-height:1.04;margin:10px 0 24px;font-weight:700}
+.vis{position:relative;height:420px}.vis .ph{position:absolute;width:150px;height:310px;border-radius:30px}
+.vis .a{right:20%;top:40px;transform:rotate(14deg)}.vis .b{right:2%;top:80px;transform:rotate(-12deg);width:170px;height:350px}
+.dots{position:absolute;bottom:18px;left:0;right:0;display:flex;justify-content:center;gap:9px;z-index:5}.dots i{width:9px;height:9px;border-radius:50%;background:#fff6;cursor:pointer}.dots i.on{background:#fff}
+.ar{position:absolute;top:50%;z-index:5;transform:translateY(-50%);background:#0004;color:#fff;border:0;width:40px;height:40px;border-radius:50%;font-size:1.3rem;cursor:pointer}.ar.l{left:12px}.ar.r{right:12px}
+.ph{position:relative;border-radius:28px;background:linear-gradient(145deg,var(--c,#888),#111 160%);border:2px solid #0002;box-shadow:0 16px 34px #0004}
+.ph:before{content:"";position:absolute;top:9px;left:50%;width:34%;height:7px;border-radius:9px;background:#000;transform:translateX(-50%)}
+.ph:after{content:"";position:absolute;top:6%;left:8%;width:36%;height:15%;border-radius:12px;background:#0004;border:1px solid #fff4}
+.ph.mb{aspect-ratio:16/10;border-radius:8px;width:100%;height:auto}.ph.wt{width:80px;height:98px;border-radius:26px}.ph.ipd{width:124px;height:166px;border-radius:12px}
+.ph.mb:before,.ph.mb:after,.ph.wt:before,.ph.wt:after,.ph.ipd:before,.ph.ipd:after{display:none}
+/* SECCIONES */
+section{padding:56px 0}.tc{text-align:center}h2.st{font-size:clamp(1.6rem,3.6vw,2.4rem);letter-spacing:-.03em;margin-bottom:6px}.sub{color:var(--mut);margin-bottom:26px}
+.info{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}.info div{padding:10px}.info .i{font-size:2rem}.info h3{font-size:1.15rem;margin:6px 0}.info p{color:var(--mut);font-size:.88rem;margin-bottom:6px}.info a{color:var(--blue);font-size:.88rem}.info a:hover{text-decoration:underline}
+.fam{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile{background:var(--tile);border-radius:8px;padding:28px;min-height:330px;display:flex;flex-direction:column;align-items:flex-start;gap:12px;cursor:pointer;transition:.3s}
+.tile:hover{background:#e5e9f2}.tile h3{font-size:1.9rem;font-weight:600;letter-spacing:-.04em}.tp{margin:auto;display:flex;gap:16px;align-items:flex-end;justify-content:center;width:100%;padding-top:12px}
+.tile .ph{width:80px;height:164px;border-radius:17px}.tile .ph.mb{width:170px;height:106px}.tile .ph.wt{width:78px;height:96px}.tile .ph.ipd{width:112px;height:150px}.tp img{max-height:160px;max-width:45%;object-fit:contain}
+.g{background:var(--g)}
+/* TARJETAS */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.card{background:#fff;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:9px;animation:in .5s both;border:1px solid #ececf0}.g .card{border-color:transparent}.card.ag{opacity:.6}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.im{height:190px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:var(--g);overflow:hidden}.im img{max-width:100%;max-height:100%;object-fit:contain}.im .ph{height:158px;width:78px;border-radius:16px}.im .ph.mb{height:auto;width:78%}.im .ph.wt{width:80px;height:98px}.im .ph.ipd{width:120px;height:160px}
+.card h3{font-size:1.1rem;letter-spacing:-.01em}.pr{font-size:1.4rem;font-weight:700;letter-spacing:-.02em}.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tg{font-size:.72rem;padding:3px 10px;border-radius:99px;background:var(--g);color:#444}.tg.of{background:var(--tx);color:#fff;font-weight:700}.tg.ag{background:#fde4e4;color:#b42318;font-weight:700}.note{font-size:.8rem;color:var(--mut)}.card .btn{margin-top:auto;width:100%}
+/* CATEGORÍA */
+.ch{padding:40px 0 10px;text-align:center}.ch h1{font-size:clamp(2rem,6vw,3.4rem);letter-spacing:-.04em}.ch p{color:var(--mut);font-size:1.2rem}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}.chip{border:1px solid var(--line);background:#fff;color:var(--tx);border-radius:999px;padding:8px 16px;font-size:.85rem;cursor:pointer;transition:.2s}.chip:hover{border-color:#111}.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.tb{display:flex;gap:10px;align-items:center;margin:16px 0;flex-wrap:wrap}.tb input,.tb select{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-size:.9rem}.tb input{flex:1;min-width:180px}.tb span{color:var(--mut);font-size:.9rem;margin-left:auto}
+.vac{text-align:center;padding:50px 10px;color:var(--mut)}.vac .btn{margin-top:14px}
+/* FAQ + FOOTER */
+details{background:var(--g);border-radius:12px;padding:16px 20px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}details p{color:var(--mut);margin-top:10px}
+footer{background:var(--nav);color:#a1a1a6;padding:48px 0 90px;font-size:.88rem}footer .w{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:28px}footer h4{color:#fff;margin-bottom:10px;font-size:.95rem}footer li{list-style:none;margin:7px 0}footer a:hover{color:#fff}footer .logo{color:#fff;margin-bottom:10px}
+#fw{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px #25d36666;font-size:1.7rem}
+@media(max-width:860px){.nav{gap:10px;justify-content:space-between}#bg{display:block;order:3}.nr{margin-left:auto}nav{position:static}
+nav ul{display:none;position:absolute;top:60px;left:0;right:0;background:var(--nav);flex-direction:column;align-items:stretch;padding:14px 20px 22px;gap:14px;border-top:1px solid #333}nav ul.o{display:flex}nav li a{font-size:1rem}
+.sl .w{grid-template-columns:1fr}.vis{display:none}.hero{height:400px}.info{grid-template-columns:1fr 1fr}.fam{grid-template-columns:1fr 1fr;gap:8px}.tile{min-height:260px;padding:20px 16px}.tile h3{font-size:1.35rem}.tile .ph{width:56px;height:116px}.tile .ph.mb{width:118px;height:74px}
+section{padding:40px 0}.grid{grid-template-columns:1fr 1fr;gap:8px}.im{height:140px}.im .ph{height:116px;width:58px}.card{padding:12px}.pr{font-size:1.15rem}footer .w{grid-template-columns:1fr 1fr}.ar{display:none}.nr .btn{display:none}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.fam{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.info .i{display:flex;justify-content:center;color:var(--tx)}
+/* ---- MÓVIL ---- */
+@media(max-width:860px){
+ .w{padding:0 14px}#fw{bottom:calc(14px + env(safe-area-inset-bottom,0px));right:14px;width:54px;height:54px}footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
+ .hero{height:360px;min-height:0}.sl h2{font-size:2.1rem}.btn{padding:12px 22px;min-height:44px}
+ #mn li a{display:block;padding:6px 0}
+ .info{gap:6px}.info h3{font-size:1rem}.info p{font-size:.8rem}
+ #gd,#gp{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -14px;padding:0 14px 8px;scrollbar-width:none}#gd::-webkit-scrollbar,#gp::-webkit-scrollbar{display:none}
+ #gd .card,#gp .card{min-width:76%;max-width:76%;scroll-snap-align:center}
+ .tile{min-height:230px}.ch{padding:24px 0 4px}.ch p{font-size:1rem}
+ .chips{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;margin:8px -14px;padding:2px 14px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{white-space:nowrap;flex-shrink:0;padding:10px 16px}
+ .tb input{flex:1 1 100%;font-size:16px}.tb select{font-size:16px;flex:1}
+ #gc{grid-template-columns:1fr 1fr!important;gap:8px}#gc .card{padding:10px;gap:7px}#gc .card h3{font-size:.95rem}#gc .pr{font-size:1.05rem}#gc .tg{font-size:.66rem;padding:2px 7px}#gc .im{height:120px}#gc .btn{font-size:.68rem;padding:10px 6px;line-height:1.2;text-align:center}#gc .note{font-size:.7rem}
+}
+@media(max-width:360px){#gc{grid-template-columns:1fr!important}}
+
+.hi{width:100%;max-width:540px;max-height:390px;object-fit:contain;display:block;margin:auto;filter:drop-shadow(0 20px 30px #0009)}.vis{display:flex;align-items:center;justify-content:center}
+.tp .timg{max-width:92%;max-height:210px;object-fit:contain;margin:auto}.cti{height:60px;width:auto;margin:0 auto 6px;display:block}
+#bg img,.sbtn img{display:block}.sbtn{padding:6px;display:flex;opacity:.9}.sbtn:hover{opacity:1}
+@media(max-width:860px){.sl .vis{display:flex;position:absolute;right:-24px;bottom:34px;width:68%;height:auto;opacity:.55;pointer-events:none}.sl .w>div:first-child{position:relative;z-index:2}.hi{max-height:250px}.tile .tp .timg{max-height:150px}.cti{height:48px}}
+</style>
+</head>
+<body>
+<header><div class="w nav">
+<a href="#/" class="logo"><div>TECNO<small>STORE</small></div><b>TA</b></a>
+<nav><ul id="mn"></ul></nav>
+<div class="nr"><a href="#/todos" class="sbtn" aria-label="Buscar equipos"><img src="imagenes/iconos/search-outline.svg" alt="" width="22" height="22"></a><a class="btn wa" data-wa target="_blank" rel="noopener">WhatsApp</a></div>
+<button id="bg" aria-label="Menú"><img src="imagenes/iconos/menu.svg" alt="" width="26" height="26"></button></div></header>
+
+<main>
+<div id="vh">
+<div class="hero" id="hero"></div>
+<section><div class="w"><div class="info" id="bn"></div></div></section>
+<section class="g" id="destacados"><div class="w"><h2 class="st tc">Equipos destacados</h2><p class="sub tc">Una selección de nuestro stock actual.</p><div class="grid" id="gd"></div></div></section>
+<section id="categorias"><div class="w"><h2 class="st tc">Elegí tu categoría</h2><p class="sub tc">Tocá una categoría para ver los equipos disponibles.</p><div class="fam" id="fm2"></div></div></section>
+<section class="g" id="promos"><div class="w"><h2 class="st tc">Promociones</h2><p class="sub tc">Equipos marcados como oferta en nuestro listado.</p><div class="grid" id="gp"></div></div></section>
+<section id="confianza"><div class="w tc"><h2 class="st">Confianza</h2><p class="sub" id="cf"></p></div></section>
+<section class="g" id="faq"><div class="w" style="max-width:800px"><h2 class="st tc" style="margin-bottom:22px">Preguntas frecuentes</h2><div id="fq"></div></div></section>
+</div>
+
+<div id="vc" hidden class="g" style="min-height:80vh"><div class="w">
+<div class="ch"><img id="cti" class="cti" alt="" hidden><h1 id="ct1"></h1><p id="ct2"></p></div>
+<div class="chips" id="c1"></div><div class="chips" id="c2"></div>
+<div class="tb"><input id="q" type="search" placeholder="Buscar (ej: 15 Pro, azul, 256)"><select id="so"><option value="">Destacado</option><option value="pa">Precio ↑</option><option value="pd">Precio ↓</option><option value="bd">Mayor batería</option><option value="md">Modelo</option></select><span id="cn"></span></div>
+<div class="grid" id="gc" style="padding-bottom:60px"></div></div></div>
+</main>
+
+<footer id="contacto"><div class="w">
+<div><div class="logo"><div>TECNO<small>STORE</small></div><b>TA</b></div><p>Productos Apple.</p></div>
+<div><h4>Ventas</h4><ul><li><a data-wa target="_blank" rel="noopener">Consultá por WhatsApp</a></li><li id="fi"></li></ul></div>
+<div><h4>Información</h4><ul><li><a href="#/faq">Preguntas frecuentes</a></li><li><a href="#/faq">Medios de pago</a></li><li><a href="#/faq">Envíos y garantía</a></li></ul></div>
+<div><h4>Tienda</h4><ul><li id="fu"></li><li id="fl"></li><li><a href="#/todos">Catálogo completo</a></li></ul></div></div></footer>
+<a id="fw" data-wa target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#04210f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1.2-1.2-2-1-.8.8c-.8-.4-1.5-1.1-1.9-1.9l.8-.8-1-2z"/></svg></a>
+
+<script>
+// ==========================================
+// ADMINISTRACIÓN DEL STOCK - EDITAR AQUÍ
+// ==========================================
+// Para cada producto podés editar: modelo, capacidad, color, bateria, precio, moneda ("USD" o "ARS"),
+// condicion ("Usado", "Sellado", "Open Box"), estado ("disponible" o "agotado"), garantia, accesorios,
+// observaciones, imagen (ruta, ej: "imagenes/15pro.jpg"; si queda vacía se muestra una imagen provisional),
+// destacado (true/false) y oferta (true/false).
+// AGREGAR: copiá una línea y cambiá el id. ELIMINAR: borrá la línea. AGOTADO: estado:"agotado".
+
+const WHATSAPP_NUMBER = "5490000000000"; // <-- CAMBIAR: código de país + área + número, sin + ni espacios
+const OCULTAR_AGOTADOS = false; // true = los agotados no aparecen en el catálogo
+
+const productos = [
+{id:1, modelo:"iPhone 11", capacidad:"64GB", color:"Verde", bateria:"69%", precio:185000, moneda:"ARS", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:2, modelo:"iPhone 11", capacidad:"64GB", color:"Negro", bateria:"73%", precio:223000, moneda:"ARS", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:3, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"86%", precio:320, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:4, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"87%", precio:320, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:5, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"98%", precio:350, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:"", oferta:true, destacado:true},
+{id:6, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"100%", precio:370, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Batería nueva", imagen:""},
+{id:7, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"100%", precio:350, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:"", oferta:true},
+{id:8, modelo:"iPhone 13", capacidad:"128GB", color:"Azul", bateria:"", precio:500, moneda:"USD", condicion:"Sellado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:9, modelo:"iPhone 13 Pro", capacidad:"128GB", color:"Dorado", bateria:"75%", precio:340, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:10, modelo:"iPhone 13 Pro", capacidad:"128GB", color:"Grafito", bateria:"75%", precio:350, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:11, modelo:"iPhone 13 Pro", capacidad:"128GB", color:"Grafito", bateria:"82%", precio:390, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Batería cambiada", imagen:""},
+{id:12, modelo:"iPhone 13 Pro", capacidad:"128GB", color:"Dorado", bateria:"88%", precio:420, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Batería cambiada", imagen:""},
+{id:13, modelo:"iPhone 13 Pro", capacidad:"256GB", color:"Dorado", bateria:"89%", precio:460, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Batería cambiada", imagen:""},
+{id:14, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"83%", precio:300, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"La moneda no figuraba en el listado original: confirmar por WhatsApp", imagen:""},
+{id:15, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"86%", precio:350, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:16, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"98%", precio:390, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:17, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"99%", precio:390, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:18, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"99%", precio:400, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:19, modelo:"iPhone 15", capacidad:"128GB", color:"Negro", bateria:"83%", precio:410, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:20, modelo:"iPhone 15", capacidad:"128GB", color:"Negro", bateria:"85%", precio:470, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:21, modelo:"iPhone 15", capacidad:"128GB", color:"Negro", bateria:"87%", precio:500, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Tres unidades", imagen:""},
+{id:22, modelo:"iPhone 15", capacidad:"128GB", color:"Negro", bateria:"100%", precio:610, moneda:"USD", condicion:"Consultar", estado:"disponible", garantia:"Oficial hasta 12/26", accesorios:"Caja", observaciones:"", imagen:"", destacado:true},
+{id:23, modelo:"iPhone 15", capacidad:"256GB", color:"Celeste", bateria:"90%", precio:610, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:24, modelo:"iPhone 15 Pro", capacidad:"128GB", color:"Natural", bateria:"85%", precio:600, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:"", destacado:true},
+{id:25, modelo:"iPhone 15 Pro", capacidad:"256GB", color:"Azul", bateria:"90%", precio:690, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"El parlante del auricular se escucha bajo", imagen:""},
+{id:26, modelo:"iPhone 16", capacidad:"128GB", color:"Blanco", bateria:"100%", precio:750, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:27, modelo:"iPhone 16", capacidad:"128GB", color:"Negro", bateria:"100%", precio:750, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:28, modelo:"iPhone 16 Pro", capacidad:"128GB", color:"Negro", bateria:"89%", precio:790, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:29, modelo:"iPhone 16 Pro", capacidad:"128GB", color:"Negro", bateria:"93%", precio:840, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:30, modelo:"iPhone 16 Pro", capacidad:"128GB", color:"Negro", bateria:"97%", precio:865, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:31, modelo:"iPhone 16 Pro", capacidad:"256GB", color:"Natural", bateria:"96%", precio:900, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:32, modelo:"iPhone 16 Pro Max", capacidad:"256GB", color:"Negro", bateria:"89%", precio:900, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:33, modelo:"iPhone 16 Pro Max", capacidad:"256GB", color:"Desert", bateria:"91%", precio:940, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:34, modelo:"iPhone 16 Pro Max", capacidad:"256GB", color:"Natural", bateria:"92%", precio:950, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:35, modelo:"iPhone 16 Pro Max", capacidad:"256GB", color:"Natural", bateria:"93%", precio:960, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:36, modelo:"iPhone 16 Pro Max", capacidad:"512GB", color:"Negro", bateria:"89%", precio:950, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
+{id:37, modelo:"iPhone 17", capacidad:"256GB", color:"Lavender", bateria:"100%", precio:940, moneda:"USD", condicion:"Open Box", estado:"disponible", garantia:"Hasta 04/27", accesorios:"Caja + cable", observaciones:"", imagen:"", destacado:true},
+{id:38, modelo:"iPhone 17 Pro", capacidad:"256GB", color:"Azul", bateria:"100%", precio:1100, moneda:"USD", condicion:"Consultar", estado:"disponible", garantia:"", accesorios:"Caja + cable", observaciones:"", imagen:""},
+{id:39, modelo:"iPhone 17 Pro", capacidad:"256GB", color:"Azul", bateria:"100%", precio:1130, moneda:"USD", condicion:"Consultar", estado:"disponible", garantia:"Hasta 12/26", accesorios:"", observaciones:"", imagen:""},
+{id:40, modelo:"iPhone 17 Pro", capacidad:"256GB", color:"Azul", bateria:"100%", precio:1160, moneda:"USD", condicion:"Open Box", estado:"disponible", garantia:"Hasta 02/27", accesorios:"Caja + cable", observaciones:"", imagen:"", destacado:true},
+{id:41, modelo:"iPhone 17 Pro Max", capacidad:"512GB", color:"Azul", bateria:"100%", precio:1340, moneda:"USD", condicion:"Consultar", estado:"disponible", garantia:"", accesorios:"Caja + cable", observaciones:"", imagen:"", destacado:true},
+{id:42, modelo:"MacBook Neo", capacidad:"256GB", color:"Azul", bateria:"", precio:890, moneda:"USD", condicion:"Sellado", estado:"disponible", garantia:"", accesorios:"", observaciones:"También disponible en pesos: $1.405.000 ARS", imagen:""}
+];
+
+// ==========================================
+// CONFIG (textos editables; [COMPLETAR] = falta información)
+// ==========================================
+const MSG_GENERAL = "Hola! Estoy interesado en los productos de TECNO STORE TA. ¿Me podrían brindar información sobre el stock disponible?";
+const BENEFICIOS = [
+ ["💬","Atención personalizada","Te respondemos directo por WhatsApp. [COMPLETAR: horarios]"],
+ ["🛡️","Garantía","Cada equipo detalla su garantía cuando corresponde. [COMPLETAR: política general]"],
+ ["💳","Medios de pago","[COMPLETAR: medios de pago aceptados]"],
+ ["📦","Envíos","[COMPLETAR: zonas, costos y tiempos]"],
+ ["🧭","Asesoramiento","Te ayudamos a elegir según tu uso y presupuesto."]];
+const CONFIANZA = "[COMPLETAR: breve historia de la tienda, años de trayectoria, testimonios reales]";
+const FAQ = [
+ ["¿Cómo compro?","Elegí el equipo y tocá «Consultar por WhatsApp». El mensaje ya incluye el producto. [COMPLETAR: pasos de pago y entrega]"],
+ ["¿Medios de pago?","[COMPLETAR]"],["¿Hacen envíos?","[COMPLETAR]"],["¿Tienen garantía?","Cada ficha indica la garantía cuando está especificada. [COMPLETAR: garantía general]"],
+ ["¿Cómo es el estado de los equipos?","Cada ficha muestra condición (Sellado, Open Box, Usado), batería y observaciones. Si un equipo dice «Consultar», pedinos el detalle."],
+ ["¿Cómo sé si hay disponibilidad?","El catálogo se actualiza con nuestro stock; igual confirmá disponibilidad por WhatsApp."],
+ ["¿Cómo consulto?","Por WhatsApp y Instagram: @tecnostore.ta"]];
+const UBICACION = "[COMPLETAR: ubicación]", EMAIL = "[COMPLETAR: contacto]";
+const REDES = [["Instagram","https://www.instagram.com/tecnostore.ta/"],["Facebook","#"]]; // reemplazar "#" por tus enlaces
+
+// ==========================================
+// LÓGICA (no hace falta tocar)
+// ==========================================
+const $ = s => document.querySelector(s);
+const COL = {midnight:"#1c1f2b",negro:"#16161a",azul:"#4f78a8",dorado:"#d4bf99",grafito:"#4b4b52",verde:"#5c8a69",celeste:"#9cc3de",natural:"#aaa397",blanco:"#e8e8ea",desert:"#bf9f84",lavender:"#c1b3e0"};
+const wa = t => "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(t);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const agot = p => p.estado === "agotado";
+const precio = p => p.moneda === "ARS" ? "$" + Number(p.precio).toLocaleString("es-AR") + " ARS" : "USD " + Number(p.precio).toLocaleString("es-AR");
+const bat = p => parseInt(p.bateria) || 0;
+const visibles = () => productos.filter(p => !(OCULTAR_AGOTADOS && agot(p)));
+
+const IM = (f,st) => `<img src="imagenes/iconos/${f}.svg" alt="" width="40" height="40" style="${st||""}">`;
+const ICONOS = [IM("profile-outline","filter:invert(1)"), IM("gear","filter:brightness(.55)"), IM("bag-outline","filter:invert(1)"), IM("map"), IM("gift","filter:brightness(.55)")];
+// CATEGORÍAS (menú + páginas). "f" decide qué productos entran; también podés poner categoria:"Accesorios" en un producto.
+const CATEGORIAS = [
+ {n:"iPhone", s:"iphone", f:p=>/^iPhone/.test(p.modelo), t:"iPhone.", sub:"Elegí tu modelo."},
+ {n:"Mac", s:"mac", f:p=>/^(MacBook|iMac|Mac )/.test(p.modelo), t:"Mac.", sub:"Notebooks y computadoras Apple.", cls:"mb"},
+ {n:"iPad", s:"ipad", f:p=>/^iPad/.test(p.modelo), t:"iPad.", sub:"Poder y portabilidad.", cls:"ipd"},
+ {n:"Apple Watch", s:"watch", f:p=>/Watch/.test(p.modelo), t:"Apple Watch.", sub:"Tu día, en la muñeca.", cls:"wt"},
+ {n:"AirPods", s:"airpods", f:p=>/AirPods/.test(p.modelo), t:"AirPods.", sub:"Sonido sin cables."},
+ {n:"Accesorios", s:"accesorios", f:p=>p.categoria === "Accesorios", t:"Accesorios.", sub:"Completá tu experiencia Apple."}];
+const TODOS = {n:"Catálogo", s:"todos", f:()=>true, t:"Catálogo.", sub:"Todo nuestro stock en un solo lugar."};
+const enCat = (c,p) => p.categoria ? p.categoria === c.n : c.f(p);
+
+function mensaje(p){
+ let t = "Hola! Estoy interesado en el " + p.modelo + " " + p.capacidad + " color " + p.color;
+ if (p.bateria) t += ", con " + p.bateria + " de batería";
+ if (p.condicion && p.condicion !== "Usado" && p.condicion !== "Consultar") t += ", condición " + p.condicion;
+ t += ", publicado a " + precio(p) + ". ";
+ return agot(p) ? t + "Veo que figura agotado. ¿Van a reponerlo o tienen algo similar?" : t + "¿Sigue disponible? ¿Me podrías brindar más información?";
+}
+// IMÁGENES: por modelo (y opcionalmente "modelo|color"). Un producto puede tener su propia foto con el campo imagen.
+// Si un modelo no figura acá, se muestra un dibujo provisional. Agregá líneas para sumar más fotos.
+const IMAGENES_MODELO = {
+ "iPhone 16":"imagenes/iphone/iphone-16-colores.png",
+ "iPhone 17":"imagenes/iphone/iphone-colores-negro-blanco-verde-azul-lila-2.png",
+ "iPhone 17 Pro":"imagenes/iphone/iphone-17-pro-plata-naranja-azul-3.png",
+ "iPhone 17 Pro Max":"imagenes/iphone/iphone-17-pro-plata-naranja-azul-3.png",
+ "MacBook Neo":"imagenes/mac/macbook-neo-azul.png"};
+const CAT_IMG = { // [foto del bloque, ícono del título]
+ iphone:["imagenes/iphone/iphone-17-pro-plata-naranja-azul-3.png","imagenes/iconos-dibujo/icono-iphone.png"],
+ mac:["imagenes/mac/macbook-pro-negro-espacial-14-y-16.png","imagenes/iconos-dibujo/icono-macbook.png"],
+ ipad:["imagenes/ipad/ipad-air-colores.png","imagenes/iconos-dibujo/icono-tablet.png"],
+ watch:["imagenes/apple-watch/apple-watch-se-medianoche-y-estelar.png","imagenes/iconos-dibujo/icono-apple-watch.png"],
+ airpods:["imagenes/airpods/airpods-pro-3-estuche-2.png","imagenes/iconos-dibujo/icono-airpods-pro.png"],
+ accesorios:["imagenes/accesorios/apple-pencil-usb-c.png","imagenes/iconos-dibujo/icono-earpods.png"]};
+const imgDe = p => p ? (p.imagen || IMAGENES_MODELO[p.modelo+"|"+p.color] || IMAGENES_MODELO[p.modelo] || "") : "";
+function fig(p, cls){ const i = imgDe(p), d = `<div class="ph ${cls||""}" style="--c:${p ? (COL[String(p.color).toLowerCase()]||"#888") : "#cfd3da"}" title="Imagen provisional"${i?" hidden":""}></div>`;
+ return i ? `<img src="${esc(i)}" alt="${esc(p.modelo)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">${d}` : d; }
+function clsDe(p){ const c = CATEGORIAS.find(c => enCat(c,p)); return c && c.cls || ""; }
+function card(p){
+ const tags = [p.capacidad, p.color, p.bateria && "🔋 " + p.bateria, p.condicion, p.garantia && "Garantía " + p.garantia, p.accesorios].filter(Boolean).map(t => `<span class="tg">${esc(t)}</span>`).join("");
+ return `<article class="card${agot(p)?" ag":""}"><div class="tags">${p.oferta&&!agot(p)?'<span class="tg of">OFERTA</span>':""}${agot(p)?'<span class="tg ag">AGOTADO</span>':""}</div>
+ <div class="im">${fig(p, clsDe(p))}</div><h3>${esc(p.modelo)}</h3><div class="tags">${tags}</div>
+ ${p.observaciones?`<div class="note">ⓘ ${esc(p.observaciones)}</div>`:""}<div class="pr">${precio(p)}</div>
+ <a class="btn ${agot(p)?"":"wa"}" target="_blank" rel="noopener" href="${wa(mensaje(p))}">${agot(p)?"Consultar reposición":"CONSULTAR POR WHATSAPP"}</a></article>`;
+}
+
+// ---- HOME ----
+const SLIDES = [
+ {k:"Stock actualizado", h:"iPhone.<br>Elegí tu modelo.", b:"Ver iPhone", go:"iphone", bg:"linear-gradient(135deg,#050505,#2b2c31 60%,#0a0a0b)", c:["#d9dbe0","#3d5a80"]},
+ {k:"Sellados y Open Box", h:"Equipos como nuevos,<br>con garantía.", b:"Ver Open Box", go:"iphone", cond:"Open Box", bg:"linear-gradient(135deg,#0b1220,#34507a)", c:["#c1b3e0","#4f78a8"]},
+ {k:"Atención directa", h:"¿No sabés cuál elegir?<br>Te asesoramos.", b:"Consultar por WhatsApp", wa:1, bg:"linear-gradient(135deg,#111,#4a4a50)", c:["#aaa397","#16161a"]}];
+let si = 0, st;
+SLIDES.forEach((s,i) => s.img = ["imagenes/iphone/iphone-17-pro-plata-naranja-azul-3.png","imagenes/iphone/iphone-colores-negro-blanco-verde-azul-lila-2.png","imagenes/airpods/airpods-pro-3-estuche-2.png"][i]);
+function hero(){
+ $("#hero").innerHTML = SLIDES.map((s,i) => `<div class="sl${i?"":" on"}" style="background:${s.bg};color:#fff"><div class="w"><div><small>${s.k}</small><h2>${s.h}</h2>
+  ${s.wa ? `<a class="btn lt" data-wa target="_blank" rel="noopener">${s.b}</a>` : `<a class="btn lt" href="#/${s.go}" data-k="${s.cond||""}" data-go="${s.go}">${s.b}</a>`}</div>
+  <div class="vis"><img class="hi" src="${s.img}" alt=""></div></div></div>`).join("")
+  + `<button class="ar l" aria-label="Anterior">‹</button><button class="ar r" aria-label="Siguiente">›</button><div class="dots">${SLIDES.map((_,i)=>`<i data-i="${i}"${i?"":' class="on"'}></i>`).join("")}</div>`;
+ const go = n => { si = (n + SLIDES.length) % SLIDES.length; document.querySelectorAll(".sl").forEach((e,i)=>e.classList.toggle("on",i===si)); document.querySelectorAll(".dots i").forEach((e,i)=>e.classList.toggle("on",i===si)); };
+ $("#hero .l").onclick = () => { go(si-1); auto(); }; $("#hero .r").onclick = () => { go(si+1); auto(); };
+ document.querySelectorAll(".dots i").forEach(d => d.onclick = () => { go(+d.dataset.i); auto(); });
+ const auto = () => { clearInterval(st); st = setInterval(() => go(si+1), 5500); }; auto();
+ document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", () => { S = {c:a.dataset.go, m:"", k:a.dataset.k, q:"", o:""}; }));
+}
+function home(){
+ hero();
+ $("#bn").innerHTML = BENEFICIOS.slice(0,4).map((b,i) => `<div><div class="i">${ICONOS[i]}</div><h3>${b[1]}</h3><p>${b[2]}</p><a href="#/faq">Ver más ›</a></div>`).join("");
+ $("#gd").innerHTML = visibles().filter(p=>p.destacado).map(card).join("") || '<p class="sub tc">Marcá productos con destacado:true.</p>';
+ const of = visibles().filter(p=>p.oferta); $("#gp").innerHTML = of.length ? of.map(card).join("") : '<p class="sub tc">Por el momento no hay promociones cargadas.</p>';
+ $("#fm2").innerHTML = CATEGORIAS.map(c => { const l = visibles().filter(p => enCat(c,p)), ex = [...new Map(l.map(p => [p.color,p])).values()].slice(0,2);
+  return `<a class="tile" href="#/${c.s}"><h3>${c.n}</h3><span class="btn">${l.length ? "Ver equipos" : "Próximamente"}</span><div class="tp">${CAT_IMG[c.s] ? `<img class="timg" src="${CAT_IMG[c.s][0]}" alt="${c.n}" loading="lazy">` : (ex.length?ex:[null]).map(p=>fig(p,c.cls)).join("")}</div></a>`; }).join("");
+ $("#cf").textContent = CONFIANZA;
+ $("#fq").innerHTML = FAQ.map(f => `<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join("");
+ $("#fu").textContent = "📍 " + UBICACION; $("#fl").textContent = "✉ " + EMAIL;
+ $("#fi").innerHTML = REDES.map(r => `<a href="${r[1]}" target="_blank" rel="noopener">${r[0]==="Instagram"?'<img src="imagenes/iconos/instagram.svg" width="16" height="16" alt="" style="vertical-align:-3px;margin-right:5px">':""}${r[0]}</a>`).join(" · ");
+ $("#mn").innerHTML = CATEGORIAS.map(c => `<li><a href="#/${c.s}" data-s="${c.s}">${c.n}</a></li>`).join("") + '<li><a href="#/todos" data-s="todos">Catálogo</a></li><li><a href="#/promos">Promociones</a></li><li><a href="#/faq">Preguntas</a></li>';
+ document.querySelectorAll("[data-wa]").forEach(a => a.href = wa(MSG_GENERAL));
+}
+
+// ---- PÁGINA DE CATEGORÍA ----
+let S = {c:"", m:"", k:"", q:"", o:""}, cur = null;
+function lista(){
+ const base = visibles().filter(p => enCat(cur,p));
+ const chips = (id, key, vals, todo) => { $(id).innerHTML = vals.length > 1 ? [todo,...vals].map((v,i) => `<button class="chip${(S[key]||"")===(i?v:"")?" on":""}" data-v="${i?esc(v):""}">${esc(v)}</button>`).join("") : "";
+  $(id).querySelectorAll("button").forEach(b => b.onclick = () => { S[key] = b.dataset.v; lista(); }); };
+ chips("#c1","m",[...new Set(base.map(p=>p.modelo))],"Todos los modelos");
+ chips("#c2","k",[...new Set(base.map(p=>p.condicion))],"Todas las condiciones");
+ const q = S.q.toLowerCase().trim();
+ let l = base.filter(p => (!S.m || p.modelo===S.m) && (!S.k || p.condicion===S.k) && (!q || [p.modelo,p.capacidad,p.color,p.condicion,p.observaciones].join(" ").toLowerCase().includes(q)));
+ const usd = (p,ars) => p.moneda === "ARS" ? ars : p.precio;
+ if (S.o === "pa") l.sort((a,b) => usd(a,1e9)-usd(b,1e9)); if (S.o === "pd") l.sort((a,b) => usd(b,-1)-usd(a,-1));
+ if (S.o === "bd") l.sort((a,b) => bat(b)-bat(a)); if (S.o === "md") l.sort((a,b) => a.modelo.localeCompare(b.modelo,"es",{numeric:true}));
+ $("#cn").textContent = l.length + " equipo" + (l.length===1?"":"s");
+ $("#gc").innerHTML = l.length ? l.map(card).join("") : `<div class="vac" style="grid-column:1/-1"><p>${base.length ? "No encontramos equipos con esos filtros." : "Por el momento no tenemos equipos de esta categoría cargados."}</p><a class="btn wa" target="_blank" rel="noopener" href="${wa("Hola! Quería consultar por "+cur.n+" en TECNO STORE TA. ¿Tienen disponibilidad?")}">Consultar por WhatsApp</a></div>`;
+}
+function categoria(c){
+ if (cur !== c){ cur = c; if (S.c !== c.s) S = {c:c.s, m:"", k:"", q:"", o:""}; }
+ const ci = CAT_IMG[c.s]; $("#cti").hidden = !ci; if (ci) $("#cti").src = ci[1];
+ $("#ct1").textContent = c.t; $("#ct2").textContent = c.sub; $("#q").value = S.q; $("#so").value = S.o;
+ lista();
+}
+let R = null;
+function ruta(r){
+ const h = r !== undefined ? r : location.hash.replace(/^#\/?/, ""), c = [...CATEGORIAS, TODOS].find(x => x.s === h);
+ R = h; $("#mn").classList.remove("o"); document.querySelectorAll("#mn a").forEach(a => a.classList.toggle("on", a.dataset.s === h));
+ $("#vh").hidden = !!c; $("#vc").hidden = !c;
+ if (c){ cur = null; categoria(c); scrollTo(0,0); }
+ else if (h && document.getElementById(h)) document.getElementById(h).scrollIntoView();
+ else scrollTo(0,0);
+}
+$("#q").oninput = e => { S.q = e.target.value; lista(); };
+$("#so").onchange = e => { S.o = e.target.value; lista(); };
+$("#bg").onclick = () => $("#mn").classList.toggle("o");
+// Navegación: funciona con clics aunque el navegador (o la vista previa) bloquee los cambios de dirección
+document.addEventListener("click", e => {
+ const a = e.target.closest('a[href^="#/"]'); if (!a) return;
+ e.preventDefault(); const h = a.getAttribute("href").slice(2);
+ ruta(h); try { location.hash = "#/" + h; } catch (_) {}
+});
+addEventListener("hashchange", () => { const h = location.hash.replace(/^#\/?/, ""); if (h !== R) ruta(h); });
+home(); ruta();
+</script>
+</body>
+</html>

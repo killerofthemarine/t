@@ -83,6 +83,27 @@ section{padding:40px 0}.grid{grid-template-columns:1fr 1fr;gap:8px}.im{height:14
 .tp .timg{max-width:92%;max-height:210px;object-fit:contain;margin:auto}.cti{height:60px;width:auto;margin:0 auto 6px;display:block}
 #bg img,.sbtn img{display:block}.sbtn{padding:6px;display:flex;opacity:.9}.sbtn:hover{opacity:1}
 @media(max-width:860px){.sl .vis{display:flex;position:absolute;right:-24px;bottom:34px;width:68%;height:auto;opacity:.55;pointer-events:none}.sl .w>div:first-child{position:relative;z-index:2}.hi{max-height:250px}.tile .tp .timg{max-height:150px}.cti{height:48px}}
+
+/* ---- ANIMACIONES (se desactivan solas si el dispositivo pide menos movimiento) ---- */
+.btn,.chip,.tile{position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.btn{transition:transform .15s,background .2s,color .2s,box-shadow .25s}.btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px #0002}.btn:active,.chip:active{transform:scale(.95)}
+.rip{position:absolute;border-radius:50%;background:currentColor;opacity:.25;transform:scale(0);animation:rp .6s ease-out forwards;pointer-events:none}@keyframes rp{to{transform:scale(3.5);opacity:0}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}.rv.on{opacity:1;transform:none}.tile.rv{transition:opacity .7s,transform .7s,background .3s}
+.vin{animation:vin .45s ease backwards}@keyframes vin{from{opacity:0;transform:translateY(14px)}}
+.card{animation:in .5s ease backwards;transition:transform .3s,box-shadow .3s}.card:hover{transform:translateY(-4px);box-shadow:0 14px 30px #0002}
+.card .im>*,.tile .tp>*{transition:transform .45s ease}.card:hover .im>*{transform:scale(1.07)}.tile:hover .tp>*{transform:scale(1.05)}
+.chip{transition:background .2s,color .2s,border-color .2s,transform .15s}.chip.on{animation:pop .3s}@keyframes pop{50%{transform:scale(1.08)}}
+header .nav{transition:height .3s}header.sm .nav{height:50px}header{transition:box-shadow .3s}header.sm{box-shadow:0 4px 20px #0006}
+.sl.on .w>div:first-child>*{animation:su .7s ease backwards}.sl.on .w>div:first-child>small{animation-delay:.05s}.sl.on .w>div:first-child>h2{animation-delay:.15s}.sl.on .w>div:first-child>a{animation-delay:.3s}
+@keyframes su{from{opacity:0;transform:translateY(24px)}}
+.sl.on .hi{animation:hin .9s cubic-bezier(.2,.8,.2,1) backwards .1s}@keyframes hin{from{opacity:0;transform:translateX(60px) scale(.9)}}
+.sl.on .vis{animation:flo 6s ease-in-out 1s infinite}@keyframes flo{50%{transform:translateY(-10px)}}
+.dots i{transition:width .3s,background .3s}.dots i.on{width:26px;border-radius:6px}.ar{transition:background .2s,transform .2s}.ar:hover{background:#0008;transform:translateY(-50%) scale(1.1)}
+#fw{animation:pulse 2.6s infinite;transition:transform .2s}#fw:hover{transform:scale(1.1)}#fw:active{transform:scale(.92)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #25d36699}70%{box-shadow:0 0 0 16px #25d36600}100%{box-shadow:0 0 0 0 #25d36600}}
+nav ul.o{animation:dd .25s ease backwards}@keyframes dd{from{opacity:0;transform:translateY(-8px)}}
+summary{list-style:none;display:flex;justify-content:space-between;gap:12px}summary::-webkit-details-marker{display:none}summary::after{content:"+";font-size:1.4rem;line-height:1;transition:transform .3s}details[open] summary::after{transform:rotate(45deg)}details[open] p{animation:in .35s ease backwards}
+.info a{display:inline-block;transition:transform .2s}.info a:hover{transform:translateX(4px)}
 </style>
 </head>
 <body>
@@ -300,6 +321,7 @@ function lista(){
  const usd = (p,ars) => p.moneda === "ARS" ? ars : p.precio;
  if (S.o === "pa") l.sort((a,b) => usd(a,1e9)-usd(b,1e9)); if (S.o === "pd") l.sort((a,b) => usd(b,-1)-usd(a,-1));
  if (S.o === "bd") l.sort((a,b) => bat(b)-bat(a)); if (S.o === "md") l.sort((a,b) => a.modelo.localeCompare(b.modelo,"es",{numeric:true}));
+ requestAnimationFrame(() => $("#gc").querySelectorAll(".card").forEach((c,i) => c.style.animationDelay = Math.min(i,14)*35 + "ms"));
  $("#cn").textContent = l.length + " equipo" + (l.length===1?"":"s");
  $("#gc").innerHTML = l.length ? l.map(card).join("") : `<div class="vac" style="grid-column:1/-1"><p>${base.length ? "No encontramos equipos con esos filtros." : "Por el momento no tenemos equipos de esta categoría cargados."}</p><a class="btn wa" target="_blank" rel="noopener" href="${wa("Hola! Quería consultar por "+cur.n+" en TECNO STORE TA. ¿Tienen disponibilidad?")}">Consultar por WhatsApp</a></div>`;
 }
@@ -313,7 +335,7 @@ let R = null;
 function ruta(r){
  const h = r !== undefined ? r : location.hash.replace(/^#\/?/, ""), c = [...CATEGORIAS, TODOS].find(x => x.s === h);
  R = h; $("#mn").classList.remove("o"); document.querySelectorAll("#mn a").forEach(a => a.classList.toggle("on", a.dataset.s === h));
- $("#vh").hidden = !!c; $("#vc").hidden = !c;
+ $("#vh").hidden = !!c; $("#vc").hidden = !c; const vv = $(c ? "#vc" : "#vh"); vv.classList.remove("vin"); void vv.offsetWidth; vv.classList.add("vin");
  if (c){ cur = null; categoria(c); scrollTo(0,0); }
  else if (h && document.getElementById(h)) document.getElementById(h).scrollIntoView();
  else scrollTo(0,0);
@@ -328,7 +350,18 @@ document.addEventListener("click", e => {
  ruta(h); try { location.hash = "#/" + h; } catch (_) {}
 });
 addEventListener("hashchange", () => { const h = location.hash.replace(/^#\/?/, ""); if (h !== R) ruta(h); });
-home(); ruta();
+
+// ---- ANIMACIONES ----
+document.addEventListener("pointerdown", e => {
+ const t = e.target.closest(".btn,.chip,.tile"); if (!t) return;
+ const r = t.getBoundingClientRect(), d = Math.max(r.width, r.height) * 1.2, x = document.createElement("span");
+ x.className = "rip"; x.style.cssText = `width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
+ t.appendChild(x); setTimeout(() => x.remove(), 650);
+});
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); } }), {threshold:.12});
+function reveal(){ document.querySelectorAll("#vh .st,#vh .sub,#vh .info>div,#vh .tile,#vh details,#cf").forEach((e,i) => { if (!e.classList.contains("rv")){ e.classList.add("rv"); e.style.transitionDelay = (i % 3 * 90) + "ms"; io.observe(e); } }); }
+addEventListener("scroll", () => document.querySelector("header").classList.toggle("sm", scrollY > 40), {passive:true});
+home(); reveal(); ruta();
 </script>
 </body>
 </html>

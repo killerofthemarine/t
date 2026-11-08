@@ -61,7 +61,7 @@ nav ul{display:none;position:absolute;top:60px;left:0;right:0;background:var(--n
 .sl .w{grid-template-columns:1fr}.vis{display:none}.hero{height:400px}.info{grid-template-columns:1fr 1fr}.fam{grid-template-columns:1fr 1fr;gap:8px}.tile{min-height:260px;padding:20px 16px}.tile h3{font-size:1.35rem}.tile .ph{width:56px;height:116px}.tile .ph.mb{width:118px;height:74px}
 section{padding:40px 0}.grid{grid-template-columns:1fr 1fr;gap:8px}.im{height:140px}.im .ph{height:116px;width:58px}.card{padding:12px}.pr{font-size:1.15rem}footer .w{grid-template-columns:1fr 1fr}.ar{display:none}.nr .btn{display:none}}
 @media(max-width:480px){.grid{grid-template-columns:1fr}.fam{grid-template-columns:1fr 1fr}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){#fw,.sl.on .vis,.btn.wa:before{animation:none!important}}
 
 .info .i{display:flex;justify-content:center;color:var(--tx)}
 /* ---- MÓVIL ---- */
@@ -104,6 +104,28 @@ header .nav{transition:height .3s}header.sm .nav{height:50px}header{transition:b
 nav ul.o{animation:dd .25s ease backwards}@keyframes dd{from{opacity:0;transform:translateY(-8px)}}
 summary{list-style:none;display:flex;justify-content:space-between;gap:12px}summary::-webkit-details-marker{display:none}summary::after{content:"+";font-size:1.4rem;line-height:1;transition:transform .3s}details[open] summary::after{transform:rotate(45deg)}details[open] p{animation:in .35s ease backwards}
 .info a{display:inline-block;transition:transform .2s}.info a:hover{transform:translateX(4px)}
+
+/* ---- ANIMACIONES MÁS NOTORIAS ---- */
+.btn{transition:transform .3s cubic-bezier(.34,1.56,.64,1),background .2s,color .2s,box-shadow .25s}.btn:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 10px 24px #0003}.btn:active,.chip:active{transform:scale(.86)}
+.rip{opacity:.4;animation:rp .8s ease-out forwards}@keyframes rp{to{transform:scale(4.5);opacity:0}}
+.rv{opacity:0;transform:translateY(60px) scale(.95);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.9,.3,1.15)}.rv.on{opacity:1;transform:none}.tile.rv{transition:opacity .9s,transform .9s cubic-bezier(.2,.9,.3,1.15),background .3s}
+#vh .card{animation:none}.card.rv.on:hover,.card:hover{transform:translateY(-8px);box-shadow:0 22px 44px #0003}.tile.rv.on:hover{transform:translateY(-6px) scale(1.02)}
+@keyframes in{from{opacity:0;transform:translateY(46px) scale(.9)}}.card{animation:in .7s cubic-bezier(.2,.9,.3,1.1) backwards}
+.card:hover .im>*{transform:scale(1.18) rotate(-2deg)}.tile:hover .tp>*{transform:scale(1.12)}
+@keyframes vin{from{opacity:0;transform:translateY(46px) scale(.97)}}.vin{animation:vin .7s cubic-bezier(.2,.9,.3,1.05) backwards}
+@keyframes pop{40%{transform:scale(1.22)}70%{transform:scale(.94)}}.chip.on{animation:pop .45s}
+.sl.on .w>div:first-child>*{animation:su .9s cubic-bezier(.2,.9,.3,1.1) backwards}.sl.on .w>div:first-child>small{animation-delay:.1s}.sl.on .w>div:first-child>h2{animation-delay:.3s}.sl.on .w>div:first-child>a{animation-delay:.55s}
+@keyframes su{from{opacity:0;transform:translateY(60px)}}
+.sl.on .hi{animation:hin 1.2s cubic-bezier(.2,.9,.3,1.1) backwards .2s}@keyframes hin{from{opacity:0;transform:translateX(140px) scale(.75) rotate(10deg)}}
+@keyframes flo{50%{transform:translateY(-16px)}}
+nav li a{position:relative}nav li a:after{content:"";position:absolute;left:0;bottom:-7px;height:2px;width:0;background:#fff;transition:width .3s}nav li a:hover:after,nav li a.on:after{width:100%}
+.logo{transition:transform .3s}.logo:hover{transform:scale(1.06)}
+.btn.wa:before{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,#fff9,transparent);transform:skewX(-20deg);animation:gl 3.2s infinite;pointer-events:none}@keyframes gl{0%,55%{left:-80%}100%{left:140%}}
+#fw{animation:pulse 2.4s infinite,bump 5s infinite}@keyframes bump{0%,86%,100%{transform:translateY(0)}90%{transform:translateY(-14px)}94%{transform:translateY(0)}97%{transform:translateY(-5px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #25d366bb}70%{box-shadow:0 0 0 22px #25d36600}100%{box-shadow:0 0 0 0 #25d36600}}
+.info .i{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}.info>div:hover .i{transform:translateY(-8px) rotate(-8deg) scale(1.15)}
+.dots i.on{width:34px}
+@media(max-width:860px){.tile:last-child:nth-child(odd){grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -230,14 +252,13 @@ const visibles = () => productos.filter(p => !(OCULTAR_AGOTADOS && agot(p)));
 
 const IM = (f,st) => `<img src="imagenes/iconos/${f}.svg" alt="" width="40" height="40" style="${st||""}">`;
 const ICONOS = [IM("profile-outline","filter:invert(1)"), IM("gear","filter:brightness(.55)"), IM("bag-outline","filter:invert(1)"), IM("map"), IM("gift","filter:brightness(.55)")];
-// CATEGORÍAS (menú + páginas). "f" decide qué productos entran; también podés poner categoria:"Accesorios" en un producto.
+// CATEGORÍAS (menú + páginas). "f" decide qué productos entran; también podés poner categoria:"iPad" (por ejemplo) en un producto.
 const CATEGORIAS = [
  {n:"iPhone", s:"iphone", f:p=>/^iPhone/.test(p.modelo), t:"iPhone.", sub:"Elegí tu modelo."},
  {n:"Mac", s:"mac", f:p=>/^(MacBook|iMac|Mac )/.test(p.modelo), t:"Mac.", sub:"Notebooks y computadoras Apple.", cls:"mb"},
  {n:"iPad", s:"ipad", f:p=>/^iPad/.test(p.modelo), t:"iPad.", sub:"Poder y portabilidad.", cls:"ipd"},
  {n:"Apple Watch", s:"watch", f:p=>/Watch/.test(p.modelo), t:"Apple Watch.", sub:"Tu día, en la muñeca.", cls:"wt"},
- {n:"AirPods", s:"airpods", f:p=>/AirPods/.test(p.modelo), t:"AirPods.", sub:"Sonido sin cables."},
- {n:"Accesorios", s:"accesorios", f:p=>p.categoria === "Accesorios", t:"Accesorios.", sub:"Completá tu experiencia Apple."}];
+ {n:"AirPods", s:"airpods", f:p=>/AirPods/.test(p.modelo), t:"AirPods.", sub:"Sonido sin cables."}];
 const TODOS = {n:"Catálogo", s:"todos", f:()=>true, t:"Catálogo.", sub:"Todo nuestro stock en un solo lugar."};
 const enCat = (c,p) => p.categoria ? p.categoria === c.n : c.f(p);
 
@@ -261,8 +282,7 @@ const CAT_IMG = { // [foto del bloque, ícono del título]
  mac:["imagenes/mac/macbook-pro-negro-espacial-14-y-16.png","imagenes/iconos-dibujo/icono-macbook.png"],
  ipad:["imagenes/ipad/ipad-air-colores.png","imagenes/iconos-dibujo/icono-tablet.png"],
  watch:["imagenes/apple-watch/apple-watch-se-medianoche-y-estelar.png","imagenes/iconos-dibujo/icono-apple-watch.png"],
- airpods:["imagenes/airpods/airpods-pro-3-estuche-2.png","imagenes/iconos-dibujo/icono-airpods-pro.png"],
- accesorios:["imagenes/accesorios/apple-pencil-usb-c.png","imagenes/iconos-dibujo/icono-earpods.png"]};
+ airpods:["imagenes/airpods/airpods-pro-3-estuche-2.png","imagenes/iconos-dibujo/icono-airpods-pro.png"]};
 const imgDe = p => p ? (p.imagen || IMAGENES_MODELO[p.modelo+"|"+p.color] || IMAGENES_MODELO[p.modelo] || "") : "";
 function fig(p, cls){ const i = imgDe(p), d = `<div class="ph ${cls||""}" style="--c:${p ? (COL[String(p.color).toLowerCase()]||"#888") : "#cfd3da"}" title="Imagen provisional"${i?" hidden":""}></div>`;
  return i ? `<img src="${esc(i)}" alt="${esc(p.modelo)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">${d}` : d; }
@@ -321,7 +341,7 @@ function lista(){
  const usd = (p,ars) => p.moneda === "ARS" ? ars : p.precio;
  if (S.o === "pa") l.sort((a,b) => usd(a,1e9)-usd(b,1e9)); if (S.o === "pd") l.sort((a,b) => usd(b,-1)-usd(a,-1));
  if (S.o === "bd") l.sort((a,b) => bat(b)-bat(a)); if (S.o === "md") l.sort((a,b) => a.modelo.localeCompare(b.modelo,"es",{numeric:true}));
- requestAnimationFrame(() => $("#gc").querySelectorAll(".card").forEach((c,i) => c.style.animationDelay = Math.min(i,14)*35 + "ms"));
+ requestAnimationFrame(() => $("#gc").querySelectorAll(".card").forEach((c,i) => c.style.animationDelay = Math.min(i,16)*70 + "ms"));
  $("#cn").textContent = l.length + " equipo" + (l.length===1?"":"s");
  $("#gc").innerHTML = l.length ? l.map(card).join("") : `<div class="vac" style="grid-column:1/-1"><p>${base.length ? "No encontramos equipos con esos filtros." : "Por el momento no tenemos equipos de esta categoría cargados."}</p><a class="btn wa" target="_blank" rel="noopener" href="${wa("Hola! Quería consultar por "+cur.n+" en TECNO STORE TA. ¿Tienen disponibilidad?")}">Consultar por WhatsApp</a></div>`;
 }
@@ -358,8 +378,8 @@ document.addEventListener("pointerdown", e => {
  x.className = "rip"; x.style.cssText = `width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
  t.appendChild(x); setTimeout(() => x.remove(), 650);
 });
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); } }), {threshold:.12});
-function reveal(){ document.querySelectorAll("#vh .st,#vh .sub,#vh .info>div,#vh .tile,#vh details,#cf").forEach((e,i) => { if (!e.classList.contains("rv")){ e.classList.add("rv"); e.style.transitionDelay = (i % 3 * 90) + "ms"; io.observe(e); } }); }
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); setTimeout(() => e.target.style.transitionDelay = "", 1600); } }), {threshold:.12});
+function reveal(){ document.querySelectorAll("#vh .st,#vh .sub,#vh .info>div,#vh .tile,#vh .card,#vh details,#cf").forEach((e,i) => { if (!e.classList.contains("rv")){ e.classList.add("rv"); e.style.transitionDelay = (i % 4 * 140) + "ms"; io.observe(e); } }); }
 addEventListener("scroll", () => document.querySelector("header").classList.toggle("sm", scrollY > 40), {passive:true});
 home(); reveal(); ruta();
 </script>

@@ -126,6 +126,11 @@ nav li a{position:relative}nav li a:after{content:"";position:absolute;left:0;bo
 .info .i{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}.info>div:hover .i{transform:translateY(-8px) rotate(-8deg) scale(1.15)}
 .dots i.on{width:34px}
 @media(max-width:860px){.tile:last-child:nth-child(odd){grid-column:1/-1}}
+
+/* ---- HERO DESLIZABLE ---- */
+.trk{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab}.trk::-webkit-scrollbar{display:none}
+.trk .sl{position:relative;inset:auto;opacity:1;flex:0 0 100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;transition:none}
+.trk.dr{scroll-snap-type:none;cursor:grabbing;user-select:none}.trk .hi{-webkit-user-drag:none;user-select:none}
 </style>
 </head>
 <body>
@@ -160,63 +165,17 @@ nav li a{position:relative}nav li a:after{content:"";position:absolute;left:0;bo
 <div><h4>Tienda</h4><ul><li id="fu"></li><li id="fl"></li><li><a href="#/todos">Catálogo completo</a></li></ul></div></div></footer>
 <a id="fw" data-wa target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#04210f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1.2-1.2-2-1-.8.8c-.8-.4-1.5-1.1-1.9-1.9l.8-.8-1-2z"/></svg></a>
 
+<script src="productos.js"></script>
 <script>
 // ==========================================
 // ADMINISTRACIÓN DEL STOCK - EDITAR AQUÍ
 // ==========================================
-// Para cada producto podés editar: modelo, capacidad, color, bateria, precio, moneda ("USD" o "ARS"),
-// condicion ("Usado", "Sellado", "Open Box"), estado ("disponible" o "agotado"), garantia, accesorios,
-// observaciones, imagen (ruta, ej: "imagenes/15pro.jpg"; si queda vacía se muestra una imagen provisional),
-// destacado (true/false) y oferta (true/false).
-// AGREGAR: copiá una línea y cambiá el id. ELIMINAR: borrá la línea. AGOTADO: estado:"agotado".
+// El stock ya NO está en este archivo: está en productos.js (lo maneja el panel de administración).
 
 const WHATSAPP_NUMBER = "5490000000000"; // <-- CAMBIAR: código de país + área + número, sin + ni espacios
 const OCULTAR_AGOTADOS = false; // true = los agotados no aparecen en el catálogo
 
-const productos = [
-{id:1, modelo:"iPhone 11", capacidad:"64GB", color:"Verde", bateria:"69%", precio:185000, moneda:"ARS", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:2, modelo:"iPhone 11", capacidad:"64GB", color:"Negro", bateria:"73%", precio:223000, moneda:"ARS", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:3, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"86%", precio:320, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:4, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"87%", precio:320, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:5, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"98%", precio:350, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:"", oferta:true, destacado:true},
-{id:6, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"100%", precio:370, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Batería nueva", imagen:""},
-{id:7, modelo:"iPhone 13", capacidad:"128GB", color:"Midnight", bateria:"100%", precio:350, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:"", oferta:true},
-{id:8, modelo:"iPhone 13", capacidad:"128GB", color:"Azul", bateria:"", precio:500, moneda:"USD", condicion:"Sellado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:9, modelo:"iPhone 13 Pro", capacidad:"128GB", color:"Dorado", bateria:"75%", precio:340, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:10, modelo:"iPhone 13 Pro", capacidad:"128GB", color:"Grafito", bateria:"75%", precio:350, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:11, modelo:"iPhone 13 Pro", capacidad:"128GB", color:"Grafito", bateria:"82%", precio:390, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Batería cambiada", imagen:""},
-{id:12, modelo:"iPhone 13 Pro", capacidad:"128GB", color:"Dorado", bateria:"88%", precio:420, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Batería cambiada", imagen:""},
-{id:13, modelo:"iPhone 13 Pro", capacidad:"256GB", color:"Dorado", bateria:"89%", precio:460, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Batería cambiada", imagen:""},
-{id:14, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"83%", precio:300, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"La moneda no figuraba en el listado original: confirmar por WhatsApp", imagen:""},
-{id:15, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"86%", precio:350, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:16, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"98%", precio:390, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:17, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"99%", precio:390, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:18, modelo:"iPhone 14", capacidad:"128GB", color:"Midnight", bateria:"99%", precio:400, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:19, modelo:"iPhone 15", capacidad:"128GB", color:"Negro", bateria:"83%", precio:410, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:20, modelo:"iPhone 15", capacidad:"128GB", color:"Negro", bateria:"85%", precio:470, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:21, modelo:"iPhone 15", capacidad:"128GB", color:"Negro", bateria:"87%", precio:500, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"Tres unidades", imagen:""},
-{id:22, modelo:"iPhone 15", capacidad:"128GB", color:"Negro", bateria:"100%", precio:610, moneda:"USD", condicion:"Consultar", estado:"disponible", garantia:"Oficial hasta 12/26", accesorios:"Caja", observaciones:"", imagen:"", destacado:true},
-{id:23, modelo:"iPhone 15", capacidad:"256GB", color:"Celeste", bateria:"90%", precio:610, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:24, modelo:"iPhone 15 Pro", capacidad:"128GB", color:"Natural", bateria:"85%", precio:600, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:"", destacado:true},
-{id:25, modelo:"iPhone 15 Pro", capacidad:"256GB", color:"Azul", bateria:"90%", precio:690, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"El parlante del auricular se escucha bajo", imagen:""},
-{id:26, modelo:"iPhone 16", capacidad:"128GB", color:"Blanco", bateria:"100%", precio:750, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:27, modelo:"iPhone 16", capacidad:"128GB", color:"Negro", bateria:"100%", precio:750, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:28, modelo:"iPhone 16 Pro", capacidad:"128GB", color:"Negro", bateria:"89%", precio:790, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:29, modelo:"iPhone 16 Pro", capacidad:"128GB", color:"Negro", bateria:"93%", precio:840, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:30, modelo:"iPhone 16 Pro", capacidad:"128GB", color:"Negro", bateria:"97%", precio:865, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:31, modelo:"iPhone 16 Pro", capacidad:"256GB", color:"Natural", bateria:"96%", precio:900, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:32, modelo:"iPhone 16 Pro Max", capacidad:"256GB", color:"Negro", bateria:"89%", precio:900, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:33, modelo:"iPhone 16 Pro Max", capacidad:"256GB", color:"Desert", bateria:"91%", precio:940, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:34, modelo:"iPhone 16 Pro Max", capacidad:"256GB", color:"Natural", bateria:"92%", precio:950, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:35, modelo:"iPhone 16 Pro Max", capacidad:"256GB", color:"Natural", bateria:"93%", precio:960, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:36, modelo:"iPhone 16 Pro Max", capacidad:"512GB", color:"Negro", bateria:"89%", precio:950, moneda:"USD", condicion:"Usado", estado:"disponible", garantia:"", accesorios:"", observaciones:"", imagen:""},
-{id:37, modelo:"iPhone 17", capacidad:"256GB", color:"Lavender", bateria:"100%", precio:940, moneda:"USD", condicion:"Open Box", estado:"disponible", garantia:"Hasta 04/27", accesorios:"Caja + cable", observaciones:"", imagen:"", destacado:true},
-{id:38, modelo:"iPhone 17 Pro", capacidad:"256GB", color:"Azul", bateria:"100%", precio:1100, moneda:"USD", condicion:"Consultar", estado:"disponible", garantia:"", accesorios:"Caja + cable", observaciones:"", imagen:""},
-{id:39, modelo:"iPhone 17 Pro", capacidad:"256GB", color:"Azul", bateria:"100%", precio:1130, moneda:"USD", condicion:"Consultar", estado:"disponible", garantia:"Hasta 12/26", accesorios:"", observaciones:"", imagen:""},
-{id:40, modelo:"iPhone 17 Pro", capacidad:"256GB", color:"Azul", bateria:"100%", precio:1160, moneda:"USD", condicion:"Open Box", estado:"disponible", garantia:"Hasta 02/27", accesorios:"Caja + cable", observaciones:"", imagen:"", destacado:true},
-{id:41, modelo:"iPhone 17 Pro Max", capacidad:"512GB", color:"Azul", bateria:"100%", precio:1340, moneda:"USD", condicion:"Consultar", estado:"disponible", garantia:"", accesorios:"Caja + cable", observaciones:"", imagen:"", destacado:true},
-{id:42, modelo:"MacBook Neo", capacidad:"256GB", color:"Azul", bateria:"", precio:890, moneda:"USD", condicion:"Sellado", estado:"disponible", garantia:"", accesorios:"", observaciones:"También disponible en pesos: $1.405.000 ARS", imagen:""}
-];
+// (productos: ver productos.js)
 
 // ==========================================
 // CONFIG (textos editables; [COMPLETAR] = falta información)
@@ -291,7 +250,7 @@ function card(p){
  const tags = [p.capacidad, p.color, p.bateria && "🔋 " + p.bateria, p.condicion, p.garantia && "Garantía " + p.garantia, p.accesorios].filter(Boolean).map(t => `<span class="tg">${esc(t)}</span>`).join("");
  return `<article class="card${agot(p)?" ag":""}"><div class="tags">${p.oferta&&!agot(p)?'<span class="tg of">OFERTA</span>':""}${agot(p)?'<span class="tg ag">AGOTADO</span>':""}</div>
  <div class="im">${fig(p, clsDe(p))}</div><h3>${esc(p.modelo)}</h3><div class="tags">${tags}</div>
- ${p.observaciones?`<div class="note">ⓘ ${esc(p.observaciones)}</div>`:""}<div class="pr">${precio(p)}</div>
+ ${p.observaciones?`<div class="note">ⓘ ${esc(p.observaciones)}</div>`:""}${p.descripcion?`<div class="note">${esc(p.descripcion)}</div>`:""}<div class="pr">${precio(p)}</div>
  <a class="btn ${agot(p)?"":"wa"}" target="_blank" rel="noopener" href="${wa(mensaje(p))}">${agot(p)?"Consultar reposición":"CONSULTAR POR WHATSAPP"}</a></article>`;
 }
 
@@ -303,14 +262,25 @@ const SLIDES = [
 let si = 0, st;
 SLIDES.forEach((s,i) => s.img = ["imagenes/iphone/iphone-17-pro-plata-naranja-azul-3.png","imagenes/iphone/iphone-colores-negro-blanco-verde-azul-lila-2.png","imagenes/airpods/airpods-pro-3-estuche-2.png"][i]);
 function hero(){
- $("#hero").innerHTML = SLIDES.map((s,i) => `<div class="sl${i?"":" on"}" style="background:${s.bg};color:#fff"><div class="w"><div><small>${s.k}</small><h2>${s.h}</h2>
+ $("#hero").innerHTML = `<div class="trk">` + SLIDES.map((s,i) => `<div class="sl${i?"":" on"}" style="background:${s.bg};color:#fff"><div class="w"><div><small>${s.k}</small><h2>${s.h}</h2>
   ${s.wa ? `<a class="btn lt" data-wa target="_blank" rel="noopener">${s.b}</a>` : `<a class="btn lt" href="#/${s.go}" data-k="${s.cond||""}" data-go="${s.go}">${s.b}</a>`}</div>
-  <div class="vis"><img class="hi" src="${s.img}" alt=""></div></div></div>`).join("")
-  + `<button class="ar l" aria-label="Anterior">‹</button><button class="ar r" aria-label="Siguiente">›</button><div class="dots">${SLIDES.map((_,i)=>`<i data-i="${i}"${i?"":' class="on"'}></i>`).join("")}</div>`;
- const go = n => { si = (n + SLIDES.length) % SLIDES.length; document.querySelectorAll(".sl").forEach((e,i)=>e.classList.toggle("on",i===si)); document.querySelectorAll(".dots i").forEach((e,i)=>e.classList.toggle("on",i===si)); };
- $("#hero .l").onclick = () => { go(si-1); auto(); }; $("#hero .r").onclick = () => { go(si+1); auto(); };
- document.querySelectorAll(".dots i").forEach(d => d.onclick = () => { go(+d.dataset.i); auto(); });
- const auto = () => { clearInterval(st); st = setInterval(() => go(si+1), 5500); }; auto();
+  <div class="vis"><img class="hi" src="${s.img}" alt="" draggable="false"></div></div></div>`).join("")
+  + `</div><button class="ar l" aria-label="Anterior">‹</button><button class="ar r" aria-label="Siguiente">›</button><div class="dots">${SLIDES.map((_,i)=>`<i data-i="${i}"${i?"":' class="on"'}></i>`).join("")}</div>`;
+ const trk = $("#hero .trk"), sl = [...trk.children], dots = [...document.querySelectorAll(".dots i")];
+ const go = n => { si = (n + SLIDES.length) % SLIDES.length; trk.scrollTo({left: si * trk.clientWidth, behavior: "smooth"}); };
+ const mark = () => { const i = Math.max(0, Math.min(SLIDES.length-1, Math.round(trk.scrollLeft / trk.clientWidth)));
+  if (!sl[i].classList.contains("on")){ si = i; sl.forEach((e,j) => e.classList.toggle("on", j === i)); dots.forEach((e,j) => e.classList.toggle("on", j === i)); } };
+ const auto = () => { clearInterval(st); st = setInterval(() => go(si+1), 6000); };
+ let tm; trk.addEventListener("scroll", () => { mark(); clearInterval(st); clearTimeout(tm); tm = setTimeout(auto, 4000); }, {passive:true});
+ $("#hero .l").onclick = () => go(si-1); $("#hero .r").onclick = () => go(si+1); dots.forEach(d => d.onclick = () => go(+d.dataset.i));
+ // arrastrar con el mouse (en el celular se desliza con el dedo)
+ let dn = false, x0 = 0, l0 = 0, mv = 0;
+ trk.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") return; dn = true; mv = 0; x0 = e.clientX; l0 = trk.scrollLeft; trk.classList.add("dr"); });
+ addEventListener("pointermove", e => { if (!dn) return; const d = e.clientX - x0; mv = Math.max(mv, Math.abs(d)); trk.scrollLeft = l0 - d; });
+ addEventListener("pointerup", () => { if (!dn) return; dn = false; const w = trk.clientWidth, d = trk.scrollLeft - l0; trk.scrollTo({left: Math.round((l0 + (Math.abs(d) > w*.15 ? Math.sign(d)*w : 0)) / w) * w, behavior:"smooth"}); setTimeout(() => trk.classList.remove("dr"), 600); });
+ trk.addEventListener("click", e => { if (mv > 6){ e.preventDefault(); e.stopPropagation(); mv = 0; } }, true);
+ addEventListener("resize", () => trk.scrollTo({left: si * trk.clientWidth}));
+ auto();
  document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", () => { S = {c:a.dataset.go, m:"", k:a.dataset.k, q:"", o:""}; }));
 }
 function home(){
@@ -337,7 +307,7 @@ function lista(){
  chips("#c1","m",[...new Set(base.map(p=>p.modelo))],"Todos los modelos");
  chips("#c2","k",[...new Set(base.map(p=>p.condicion))],"Todas las condiciones");
  const q = S.q.toLowerCase().trim();
- let l = base.filter(p => (!S.m || p.modelo===S.m) && (!S.k || p.condicion===S.k) && (!q || [p.modelo,p.capacidad,p.color,p.condicion,p.observaciones].join(" ").toLowerCase().includes(q)));
+ let l = base.filter(p => (!S.m || p.modelo===S.m) && (!S.k || p.condicion===S.k) && (!q || [p.modelo,p.capacidad,p.color,p.condicion,p.observaciones,p.descripcion].join(" ").toLowerCase().includes(q)));
  const usd = (p,ars) => p.moneda === "ARS" ? ars : p.precio;
  if (S.o === "pa") l.sort((a,b) => usd(a,1e9)-usd(b,1e9)); if (S.o === "pd") l.sort((a,b) => usd(b,-1)-usd(a,-1));
  if (S.o === "bd") l.sort((a,b) => bat(b)-bat(a)); if (S.o === "md") l.sort((a,b) => a.modelo.localeCompare(b.modelo,"es",{numeric:true}));

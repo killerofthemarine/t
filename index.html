@@ -131,6 +131,7 @@ nav li a{position:relative}nav li a:after{content:"";position:absolute;left:0;bo
 .trk{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab}.trk::-webkit-scrollbar{display:none}
 .trk .sl{position:relative;inset:auto;opacity:1;flex:0 0 100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;transition:none}
 .trk.dr{scroll-snap-type:none;cursor:grabbing;user-select:none}.trk .hi{-webkit-user-drag:none;user-select:none}
+.info{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.ben{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;text-align:left}.bx{background:var(--g);border-radius:14px;padding:20px}@media(max-width:860px){.info{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -144,11 +145,11 @@ nav li a{position:relative}nav li a:after{content:"";position:absolute;left:0;bo
 <div id="vh">
 <div class="hero" id="hero"></div>
 <section><div class="w"><div class="info" id="bn"></div></div></section>
-<section class="g" id="destacados"><div class="w"><h2 class="st tc">Equipos destacados</h2><p class="sub tc">Una selección de nuestro stock actual.</p><div class="grid" id="gd"></div></div></section>
-<section id="categorias"><div class="w"><h2 class="st tc">Elegí tu categoría</h2><p class="sub tc">Tocá una categoría para ver los equipos disponibles.</p><div class="fam" id="fm2"></div></div></section>
-<section class="g" id="promos"><div class="w"><h2 class="st tc">Promociones</h2><p class="sub tc">Equipos marcados como oferta en nuestro listado.</p><div class="grid" id="gp"></div></div></section>
-<section id="confianza"><div class="w tc"><h2 class="st">Confianza</h2><p class="sub" id="cf"></p></div></section>
-<section class="g" id="faq"><div class="w" style="max-width:800px"><h2 class="st tc" style="margin-bottom:22px">Preguntas frecuentes</h2><div id="fq"></div></div></section>
+<section class="g" id="destacados"><div class="w"><h2 class="st tc" id="tDestT">Equipos destacados</h2><p class="sub tc" id="tDestS">Una selección de nuestro stock actual.</p><div class="grid" id="gd"></div></div></section>
+<section id="categorias"><div class="w"><h2 class="st tc" id="tCatT">Elegí tu categoría</h2><p class="sub tc" id="tCatS">Tocá una categoría para ver los equipos disponibles.</p><div class="fam" id="fm2"></div></div></section>
+<section class="g" id="promos"><div class="w"><h2 class="st tc" id="tPromT">Promociones</h2><p class="sub tc" id="tPromS">Equipos marcados como oferta en nuestro listado.</p><div class="grid" id="gp"></div></div></section>
+<section id="confianza"><div class="w tc"><h2 class="st" id="tConfT">Confianza</h2><p class="sub" id="cf"></p><div class="ben" id="tt" style="max-width:900px;margin:auto"></div></div></section>
+<section class="g" id="faq"><div class="w" style="max-width:800px"><h2 class="st tc" id="tFaqT" style="margin-bottom:22px">Preguntas frecuentes</h2><div id="fq"></div></div></section>
 </div>
 
 <div id="vc" hidden class="g" style="min-height:80vh"><div class="w">
@@ -159,44 +160,27 @@ nav li a{position:relative}nav li a:after{content:"";position:absolute;left:0;bo
 </main>
 
 <footer id="contacto"><div class="w">
-<div><div class="logo"><div>TECNO<small>STORE</small></div><b>TA</b></div><p>Productos Apple.</p></div>
+<div><div class="logo"><div>TECNO<small>STORE</small></div><b>TA</b></div><p id="tFoot">Productos Apple.</p></div>
 <div><h4>Ventas</h4><ul><li><a data-wa target="_blank" rel="noopener">Consultá por WhatsApp</a></li><li id="fi"></li></ul></div>
 <div><h4>Información</h4><ul><li><a href="#/faq">Preguntas frecuentes</a></li><li><a href="#/faq">Medios de pago</a></li><li><a href="#/faq">Envíos y garantía</a></li></ul></div>
 <div><h4>Tienda</h4><ul><li id="fu"></li><li id="fl"></li><li><a href="#/todos">Catálogo completo</a></li></ul></div></div></footer>
 <a id="fw" data-wa target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#04210f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1.2-1.2-2-1-.8.8c-.8-.4-1.5-1.1-1.9-1.9l.8-.8-1-2z"/></svg></a>
 
+<script src="config.js"></script>
 <script src="productos.js"></script>
 <script src="categorias.js"></script>
 <script>
 // ==========================================
-// ADMINISTRACIÓN DEL STOCK - EDITAR AQUÍ
+// CONFIGURACIÓN: todo se edita desde el PANEL de administración.
+//  - config.js     -> paneles del inicio, textos, contacto, preguntas, etc.
+//  - productos.js  -> los equipos
+//  - categorias.js -> las categorías
 // ==========================================
-// El stock ya NO está en este archivo: está en productos.js (lo maneja el panel de administración).
-
-const WHATSAPP_NUMBER = "5490000000000"; // <-- CAMBIAR: código de país + área + número, sin + ni espacios
-const OCULTAR_AGOTADOS = false; // true = los agotados no aparecen en el catálogo
-
-// (productos: ver productos.js)
-
-// ==========================================
-// CONFIG (textos editables; [COMPLETAR] = falta información)
-// ==========================================
-const MSG_GENERAL = "Hola! Estoy interesado en los productos de TECNO STORE TA. ¿Me podrían brindar información sobre el stock disponible?";
-const BENEFICIOS = [
- ["💬","Atención personalizada","Te respondemos directo por WhatsApp. [COMPLETAR: horarios]"],
- ["🛡️","Garantía","Cada equipo detalla su garantía cuando corresponde. [COMPLETAR: política general]"],
- ["💳","Medios de pago","[COMPLETAR: medios de pago aceptados]"],
- ["📦","Envíos","[COMPLETAR: zonas, costos y tiempos]"],
- ["🧭","Asesoramiento","Te ayudamos a elegir según tu uso y presupuesto."]];
-const CONFIANZA = "[COMPLETAR: breve historia de la tienda, años de trayectoria, testimonios reales]";
-const FAQ = [
- ["¿Cómo compro?","Elegí el equipo y tocá «Consultar por WhatsApp». El mensaje ya incluye el producto. [COMPLETAR: pasos de pago y entrega]"],
- ["¿Medios de pago?","[COMPLETAR]"],["¿Hacen envíos?","[COMPLETAR]"],["¿Tienen garantía?","Cada ficha indica la garantía cuando está especificada. [COMPLETAR: garantía general]"],
- ["¿Cómo es el estado de los equipos?","Cada ficha muestra condición (Sellado, Open Box, Usado), batería y observaciones. Si un equipo dice «Consultar», pedinos el detalle."],
- ["¿Cómo sé si hay disponibilidad?","El catálogo se actualiza con nuestro stock; igual confirmá disponibilidad por WhatsApp."],
- ["¿Cómo consulto?","Por WhatsApp y Instagram: @tecnostore.ta"]];
-const UBICACION = "[COMPLETAR: ubicación]", EMAIL = "[COMPLETAR: contacto]";
-const REDES = [["Instagram","https://www.instagram.com/tecnostore.ta/"],["Facebook","#"]]; // reemplazar "#" por tus enlaces
+const WHATSAPP_NUMBER = config.whatsapp;
+const OCULTAR_AGOTADOS = !!config.ocultarAgotados;
+const MSG_GENERAL = config.mensajeGeneral;
+const BENEFICIOS = config.beneficios || [], CONFIANZA = config.confianza || "", FAQ = config.faq || [];
+const UBICACION = config.ubicacion || "", EMAIL = config.email || "", REDES = config.redes || [], TEXTOS = config.textos || {};
 
 // ==========================================
 // LÓGICA (no hace falta tocar)
@@ -211,7 +195,8 @@ const bat = p => parseInt(p.bateria) || 0;
 const visibles = () => productos.filter(p => !(OCULTAR_AGOTADOS && agot(p)));
 
 const IM = (f,st) => `<img src="imagenes/iconos/${f}.svg" alt="" width="40" height="40" style="${st||""}">`;
-const ICONOS = [IM("profile-outline","filter:invert(1)"), IM("gear","filter:brightness(.55)"), IM("bag-outline","filter:invert(1)"), IM("map"), IM("gift","filter:brightness(.55)")];
+const ICONO_ESTILO = {"profile-outline":"filter:invert(1)","bag-outline":"filter:invert(1)","gear":"filter:brightness(.55)","gift":"filter:brightness(.55)"};
+const icono = n => IM(n, ICONO_ESTILO[n] || "");
 // CATEGORÍAS: se administran desde el panel (archivo categorias.js). Cada producto tiene su campo "categoria".
 const FORMAS = {celular:"", notebook:"mb", reloj:"wt", tablet:"ipd"};
 const slugDe = t => String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
@@ -248,16 +233,13 @@ function card(p){
 }
 
 // ---- HOME ----
-const SLIDES = [
- {k:"Stock actualizado", h:"iPhone.<br>Elegí tu modelo.", b:"Ver iPhone", go:"iphone", bg:"linear-gradient(135deg,#050505,#2b2c31 60%,#0a0a0b)", c:["#d9dbe0","#3d5a80"]},
- {k:"Sellados y Open Box", h:"Equipos como nuevos,<br>con garantía.", b:"Ver Open Box", go:"iphone", cond:"Open Box", bg:"linear-gradient(135deg,#0b1220,#34507a)", c:["#c1b3e0","#4f78a8"]},
- {k:"Atención directa", h:"¿No sabés cuál elegir?<br>Te asesoramos.", b:"Consultar por WhatsApp", wa:1, bg:"linear-gradient(135deg,#111,#4a4a50)", c:["#aaa397","#16161a"]}];
+const FONDOS = {negro:"linear-gradient(135deg,#050505,#2b2c31 60%,#0a0a0b)", azul:"linear-gradient(135deg,#0b1220,#34507a)", gris:"linear-gradient(135deg,#111,#4a4a50)", violeta:"linear-gradient(135deg,#140a24,#5b3a8c)", verde:"linear-gradient(135deg,#06150d,#1f6b46)", rojo:"linear-gradient(135deg,#1a0707,#8a2a2a)"};
+const SLIDES = (config.slides || []).map(s => ({k:esc(s.kicker), h:esc(s.titulo).replace(/\n/g,"<br>"), b:esc(s.boton), accion:s.accion, go:s.accion === "categoria" && s.destino ? s.destino : "todos", cond:s.condicion || "", url:s.url || "", img:s.imagen || "", bg:FONDOS[s.fondo] || FONDOS.negro}));
 let si = 0, st;
-SLIDES.forEach((s,i) => s.img = ["imagenes/iphone/iphone-17-pro-plata-naranja-azul-3.png","imagenes/iphone/iphone-colores-negro-blanco-verde-azul-lila-2.png","imagenes/airpods/airpods-pro-3-estuche-2.png"][i]);
 function hero(){
  $("#hero").innerHTML = `<div class="trk">` + SLIDES.map((s,i) => `<div class="sl${i?"":" on"}" style="background:${s.bg};color:#fff"><div class="w"><div><small>${s.k}</small><h2>${s.h}</h2>
-  ${s.wa ? `<a class="btn lt" data-wa target="_blank" rel="noopener">${s.b}</a>` : `<a class="btn lt" href="#/${s.go}" data-k="${s.cond||""}" data-go="${s.go}">${s.b}</a>`}</div>
-  <div class="vis"><img class="hi" src="${s.img}" alt="" draggable="false"></div></div></div>`).join("")
+  ${s.accion === "whatsapp" ? `<a class="btn lt" data-wa target="_blank" rel="noopener">${s.b}</a>` : s.accion === "link" ? `<a class="btn lt" href="${esc(s.url)}" target="_blank" rel="noopener">${s.b}</a>` : `<a class="btn lt" href="#/${s.go}" data-k="${s.cond}" data-go="${s.go}">${s.b}</a>`}</div>
+  <div class="vis">${s.img ? `<img class="hi" src="${esc(s.img)}" alt="" draggable="false">` : ""}</div></div></div>`).join("")
   + `</div><button class="ar l" aria-label="Anterior">‹</button><button class="ar r" aria-label="Siguiente">›</button><div class="dots">${SLIDES.map((_,i)=>`<i data-i="${i}"${i?"":' class="on"'}></i>`).join("")}</div>`;
  const trk = $("#hero .trk"), sl = [...trk.children], dots = [...document.querySelectorAll(".dots i")];
  const go = n => { si = (n + SLIDES.length) % SLIDES.length; trk.scrollTo({left: si * trk.clientWidth, behavior: "smooth"}); };
@@ -278,15 +260,18 @@ function hero(){
 }
 function home(){
  hero();
- $("#bn").innerHTML = BENEFICIOS.slice(0,4).map((b,i) => `<div><div class="i">${ICONOS[i]}</div><h3>${b[1]}</h3><p>${b[2]}</p><a href="#/faq">Ver más ›</a></div>`).join("");
+ $("#bn").innerHTML = BENEFICIOS.map(b => `<div><div class="i">${icono(b.icono)}</div><h3>${esc(b.titulo)}</h3><p>${esc(b.texto)}</p><a href="#/faq">Ver más ›</a></div>`).join("");
  $("#gd").innerHTML = visibles().filter(p=>p.destacado).map(card).join("") || '<p class="sub tc">Marcá productos con destacado:true.</p>';
  const of = visibles().filter(p=>p.oferta); $("#gp").innerHTML = of.length ? of.map(card).join("") : '<p class="sub tc">Por el momento no hay promociones cargadas.</p>';
  $("#fm2").innerHTML = CATEGORIAS.map(c => { const l = visibles().filter(p => enCat(c,p)), ex = [...new Map(l.map(p => [p.color,p])).values()].slice(0,2);
   return `<a class="tile" href="#/${c.s}"><h3>${esc(c.n)}</h3><span class="btn">${l.length ? "Ver equipos" : "Próximamente"}</span><div class="tp">${c.img ? `<img class="timg" src="${esc(c.img)}" alt="${c.n}" loading="lazy">` : (ex.length?ex:[null]).map(p=>fig(p,c.cls)).join("")}</div></a>`; }).join("");
  $("#cf").textContent = CONFIANZA;
- $("#fq").innerHTML = FAQ.map(f => `<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join("");
- $("#fu").textContent = "📍 " + UBICACION; $("#fl").textContent = "✉ " + EMAIL;
- $("#fi").innerHTML = REDES.map(r => `<a href="${r[1]}" target="_blank" rel="noopener">${r[0]==="Instagram"?'<img src="imagenes/iconos/instagram.svg" width="16" height="16" alt="" style="vertical-align:-3px;margin-right:5px">':""}${r[0]}</a>`).join(" · ");
+ $("#tt").innerHTML = (config.testimonios || []).map(t => `<div class="bx"><p style="color:var(--tx)">“${esc(t.texto)}”</p><p style="margin-top:8px"><b>${esc(t.nombre)}</b></p></div>`).join("");
+ const T = TEXTOS, set = (id, v) => { if (v) $(id).textContent = v; };
+ set("#tDestT", T.destT); set("#tDestS", T.destS); set("#tCatT", T.catT); set("#tCatS", T.catS); set("#tPromT", T.promT); set("#tPromS", T.promS); set("#tConfT", T.confT); set("#tFaqT", T.faqT); set("#tFoot", T.footer);
+ $("#fq").innerHTML = FAQ.map(f => `<details><summary>${esc(f.p)}</summary><p>${esc(f.r)}</p></details>`).join("");
+ $("#fu").textContent = UBICACION ? "📍 " + UBICACION : ""; $("#fl").textContent = EMAIL ? "✉ " + EMAIL : "";
+ $("#fi").innerHTML = REDES.map(r => `<a href="${esc(r.url)}" target="_blank" rel="noopener">${r.nombre==="Instagram"?'<img src="imagenes/iconos/instagram.svg" width="16" height="16" alt="" style="vertical-align:-3px;margin-right:5px">':""}${esc(r.nombre)}</a>`).join(" · ");
  $("#mn").innerHTML = CATEGORIAS.map(c => `<li><a href="#/${c.s}" data-s="${c.s}">${esc(c.n)}</a></li>`).join("") + '<li><a href="#/todos" data-s="todos">Catálogo</a></li><li><a href="#/promos">Promociones</a></li><li><a href="#/faq">Preguntas</a></li>';
  document.querySelectorAll("[data-wa]").forEach(a => a.href = wa(MSG_GENERAL));
 }
@@ -294,7 +279,7 @@ function home(){
 // ---- PÁGINA DE CATEGORÍA ----
 let S = {c:"", m:"", k:"", q:"", o:""}, cur = null;
 function lista(){
- const base = visibles().filter(p => enCat(cur,p));
+ const base = cur === TODOS ? visibles() : visibles().filter(p => enCat(cur,p));
  const chips = (id, key, vals, todo) => { $(id).innerHTML = vals.length > 1 ? [todo,...vals].map((v,i) => `<button class="chip${(S[key]||"")===(i?v:"")?" on":""}" data-v="${i?esc(v):""}">${esc(v)}</button>`).join("") : "";
   $(id).querySelectorAll("button").forEach(b => b.onclick = () => { S[key] = b.dataset.v; lista(); }); };
  chips("#c1","m",[...new Set(base.map(p=>p.modelo))],"Todos los modelos");

@@ -166,6 +166,7 @@ nav li a{position:relative}nav li a:after{content:"";position:absolute;left:0;bo
 <a id="fw" data-wa target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#04210f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1.2-1.2-2-1-.8.8c-.8-.4-1.5-1.1-1.9-1.9l.8-.8-1-2z"/></svg></a>
 
 <script src="productos.js"></script>
+<script src="categorias.js"></script>
 <script>
 // ==========================================
 // ADMINISTRACIÓN DEL STOCK - EDITAR AQUÍ
@@ -211,15 +212,13 @@ const visibles = () => productos.filter(p => !(OCULTAR_AGOTADOS && agot(p)));
 
 const IM = (f,st) => `<img src="imagenes/iconos/${f}.svg" alt="" width="40" height="40" style="${st||""}">`;
 const ICONOS = [IM("profile-outline","filter:invert(1)"), IM("gear","filter:brightness(.55)"), IM("bag-outline","filter:invert(1)"), IM("map"), IM("gift","filter:brightness(.55)")];
-// CATEGORÍAS (menú + páginas). "f" decide qué productos entran; también podés poner categoria:"iPad" (por ejemplo) en un producto.
-const CATEGORIAS = [
- {n:"iPhone", s:"iphone", f:p=>/^iPhone/.test(p.modelo), t:"iPhone.", sub:"Elegí tu modelo."},
- {n:"Mac", s:"mac", f:p=>/^(MacBook|iMac|Mac )/.test(p.modelo), t:"Mac.", sub:"Notebooks y computadoras Apple.", cls:"mb"},
- {n:"iPad", s:"ipad", f:p=>/^iPad/.test(p.modelo), t:"iPad.", sub:"Poder y portabilidad.", cls:"ipd"},
- {n:"Apple Watch", s:"watch", f:p=>/Watch/.test(p.modelo), t:"Apple Watch.", sub:"Tu día, en la muñeca.", cls:"wt"},
- {n:"AirPods", s:"airpods", f:p=>/AirPods/.test(p.modelo), t:"AirPods.", sub:"Sonido sin cables."}];
-const TODOS = {n:"Catálogo", s:"todos", f:()=>true, t:"Catálogo.", sub:"Todo nuestro stock en un solo lugar."};
-const enCat = (c,p) => p.categoria ? p.categoria === c.n : c.f(p);
+// CATEGORÍAS: se administran desde el panel (archivo categorias.js). Cada producto tiene su campo "categoria".
+const FORMAS = {celular:"", notebook:"mb", reloj:"wt", tablet:"ipd"};
+const slugDe = t => String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const CATEGORIAS = categorias.map(c => ({n:c.nombre, s:c.slug || slugDe(c.nombre), t:c.titulo || c.nombre + ".", sub:c.subtitulo || "", cls:FORMAS[c.forma] || "", img:c.imagen || "", ico:c.icono || ""}));
+const TODOS = {n:"Catálogo", s:"todos", t:"Catálogo.", sub:"Todo nuestro stock en un solo lugar."};
+const inferir = p => /^iPhone/.test(p.modelo) ? "iPhone" : /^(MacBook|iMac|Mac )/.test(p.modelo) ? "Mac" : /^iPad/.test(p.modelo) ? "iPad" : /Watch/.test(p.modelo) ? "Apple Watch" : /AirPods/.test(p.modelo) ? "AirPods" : "";
+const enCat = (c,p) => (p.categoria || inferir(p)) === c.n;
 
 function mensaje(p){
  let t = "Hola! Estoy interesado en el " + p.modelo + " " + p.capacidad + " color " + p.color;
@@ -236,12 +235,6 @@ const IMAGENES_MODELO = {
  "iPhone 17 Pro":"imagenes/iphone/iphone-17-pro-plata-naranja-azul-3.png",
  "iPhone 17 Pro Max":"imagenes/iphone/iphone-17-pro-plata-naranja-azul-3.png",
  "MacBook Neo":"imagenes/mac/macbook-neo-azul.png"};
-const CAT_IMG = { // [foto del bloque, ícono del título]
- iphone:["imagenes/iphone/iphone-17-pro-plata-naranja-azul-3.png","imagenes/iconos-dibujo/icono-iphone.png"],
- mac:["imagenes/mac/macbook-pro-negro-espacial-14-y-16.png","imagenes/iconos-dibujo/icono-macbook.png"],
- ipad:["imagenes/ipad/ipad-air-colores.png","imagenes/iconos-dibujo/icono-tablet.png"],
- watch:["imagenes/apple-watch/apple-watch-se-medianoche-y-estelar.png","imagenes/iconos-dibujo/icono-apple-watch.png"],
- airpods:["imagenes/airpods/airpods-pro-3-estuche-2.png","imagenes/iconos-dibujo/icono-airpods-pro.png"]};
 const imgDe = p => p ? (p.imagen || IMAGENES_MODELO[p.modelo+"|"+p.color] || IMAGENES_MODELO[p.modelo] || "") : "";
 function fig(p, cls){ const i = imgDe(p), d = `<div class="ph ${cls||""}" style="--c:${p ? (COL[String(p.color).toLowerCase()]||"#888") : "#cfd3da"}" title="Imagen provisional"${i?" hidden":""}></div>`;
  return i ? `<img src="${esc(i)}" alt="${esc(p.modelo)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">${d}` : d; }
@@ -289,12 +282,12 @@ function home(){
  $("#gd").innerHTML = visibles().filter(p=>p.destacado).map(card).join("") || '<p class="sub tc">Marcá productos con destacado:true.</p>';
  const of = visibles().filter(p=>p.oferta); $("#gp").innerHTML = of.length ? of.map(card).join("") : '<p class="sub tc">Por el momento no hay promociones cargadas.</p>';
  $("#fm2").innerHTML = CATEGORIAS.map(c => { const l = visibles().filter(p => enCat(c,p)), ex = [...new Map(l.map(p => [p.color,p])).values()].slice(0,2);
-  return `<a class="tile" href="#/${c.s}"><h3>${c.n}</h3><span class="btn">${l.length ? "Ver equipos" : "Próximamente"}</span><div class="tp">${CAT_IMG[c.s] ? `<img class="timg" src="${CAT_IMG[c.s][0]}" alt="${c.n}" loading="lazy">` : (ex.length?ex:[null]).map(p=>fig(p,c.cls)).join("")}</div></a>`; }).join("");
+  return `<a class="tile" href="#/${c.s}"><h3>${esc(c.n)}</h3><span class="btn">${l.length ? "Ver equipos" : "Próximamente"}</span><div class="tp">${c.img ? `<img class="timg" src="${esc(c.img)}" alt="${c.n}" loading="lazy">` : (ex.length?ex:[null]).map(p=>fig(p,c.cls)).join("")}</div></a>`; }).join("");
  $("#cf").textContent = CONFIANZA;
  $("#fq").innerHTML = FAQ.map(f => `<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join("");
  $("#fu").textContent = "📍 " + UBICACION; $("#fl").textContent = "✉ " + EMAIL;
  $("#fi").innerHTML = REDES.map(r => `<a href="${r[1]}" target="_blank" rel="noopener">${r[0]==="Instagram"?'<img src="imagenes/iconos/instagram.svg" width="16" height="16" alt="" style="vertical-align:-3px;margin-right:5px">':""}${r[0]}</a>`).join(" · ");
- $("#mn").innerHTML = CATEGORIAS.map(c => `<li><a href="#/${c.s}" data-s="${c.s}">${c.n}</a></li>`).join("") + '<li><a href="#/todos" data-s="todos">Catálogo</a></li><li><a href="#/promos">Promociones</a></li><li><a href="#/faq">Preguntas</a></li>';
+ $("#mn").innerHTML = CATEGORIAS.map(c => `<li><a href="#/${c.s}" data-s="${c.s}">${esc(c.n)}</a></li>`).join("") + '<li><a href="#/todos" data-s="todos">Catálogo</a></li><li><a href="#/promos">Promociones</a></li><li><a href="#/faq">Preguntas</a></li>';
  document.querySelectorAll("[data-wa]").forEach(a => a.href = wa(MSG_GENERAL));
 }
 
@@ -317,7 +310,7 @@ function lista(){
 }
 function categoria(c){
  if (cur !== c){ cur = c; if (S.c !== c.s) S = {c:c.s, m:"", k:"", q:"", o:""}; }
- const ci = CAT_IMG[c.s]; $("#cti").hidden = !ci; if (ci) $("#cti").src = ci[1];
+ const ci = c.ico; $("#cti").hidden = !ci; if (ci) $("#cti").src = ci;
  $("#ct1").textContent = c.t; $("#ct2").textContent = c.sub; $("#q").value = S.q; $("#so").value = S.o;
  lista();
 }
